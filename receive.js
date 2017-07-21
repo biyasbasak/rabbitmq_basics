@@ -6,5 +6,9 @@ amqp.connect('amqp://localhost', (err, conn) => {
     const q = 'hello';
 
     ch.assertQueue(q, { durable: false });
+
+    ch.consume(q, (message) => {
+      console.log(`message received ${message}`);
+    }, {noAck: true });
   });
 });
